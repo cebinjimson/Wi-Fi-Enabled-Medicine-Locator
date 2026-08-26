@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAS Medical Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .med-card:active { transform: scale(0.95); }
+        .qty-input { width: 50px; border: 1px solid #ccc; border-radius: 4px; padding: 2px; text-align: center; color: black; }
+    </style>
+</head>
+
+<body class="bg-slate-50 font-sans">
+
+<header class="bg-teal-700 text-white p-6 shadow-lg text-center">
+    <h1 class="text-3xl font-bold">DAS Medical Shop</h1>
+    <p class="mt-2 text-teal-100">
+        ESP32 Status: 
+        <span id="conn-status" class="text-red-400 font-bold">Checking...</span>
+    </p>
+</header>
+
+<main class="max-w-4xl mx-auto p-8 text-center">
+
+    <h2 class="text-4xl font-extrabold text-slate-800 mb-8">
+        Select Your Medicine
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <div class="med-card bg-white p-6 rounded-2xl shadow-md border-b-4 border-teal-500 hover:shadow-xl transition-all">
+            <span class="text-4xl">💊</span>
+            <h3 class="text-xl font-bold mt-4 text-slate-700">Paracetamol</h3>
+            <div class="mt-2">
+                <input type="number" id="qty-paracetamol" class="qty-input" value="1" min="1">
+                <button onclick="sendOrder('paracetamol')" class="bg-teal-600 text-white px-3 py-1 rounded ml-2">Send</button>
+            </div>
+        </div>
+
+        <div class="med-card bg-white p-6 rounded-2xl shadow-md border-b-4 border-teal-500 hover:shadow-xl transition-all">
+            <span class="text-4xl">💊</span>
+            <h3 class="text-xl font-bold mt-4 text-slate-700">Cetirizine</h3>
+            <div class="mt-2">
+                <input type="number" id="qty-cetirizine" class="qty-input" value="1" min="1">
+                <button onclick="sendOrder('cetirizine')" class="bg-teal-600 text-white px-3 py-1 rounded ml-2">Send</button>
+            </div>
+        </div>
+
+        <div class="med-card bg-white p-6 rounded-2xl shadow-md border-b-4 border-teal-500 hover:shadow-xl transition-all">
+            <span class="text-4xl">💊</span>
+            <h3 class="text-xl font-bold mt-4 text-slate-700">Omeprazole</h3>
+            <div class="mt-2">
+                <input type="number" id="qty-omeprazole" class="qty-input" value="1" min="1">
+                <button onclick="sendOrder('omeprazole')" class="bg-teal-600 text-white px-3 py-1 rounded ml-2">Send</button>
+            </div>
+        </div>
+
+        <div class="med-card bg-white p-6 rounded-2xl shadow-md border-b-4 border-teal-500 hover:shadow-xl transition-all">
+            <span class="text-4xl">💊</span>
+            <h3 class="text-xl font-bold mt-4 text-slate-700">Amoxicillin</h3>
+            <div class="mt-2">
+                <input type="number" id="qty-amoxicillin" class="qty-input" value="1" min="1">
+                <button onclick="sendOrder('amoxicillin')" class="bg-teal-600 text-white px-3 py-1 rounded ml-2">Send</button>
+            </div>
+        </div>
+
+        <div class="med-card bg-white p-6 rounded-2xl shadow-md border-b-4 border-teal-500 hover:shadow-xl transition-all">
+            <span class="text-4xl">💊</span>
+            <h3 class="text-xl font-bold mt-4 text-slate-700">Vitamin D3</h3>
+            <div class="mt-2">
+                <input type="number" id="qty-vitamin-d3" class="qty-input" value="1" min="1">
+                <button onclick="sendOrder('vitamin-d3')" class="bg-teal-600 text-white px-3 py-1 rounded ml-2">Send</button>
+            </div>
+        </div>
+
+        <div class="med-card bg-white p-6 rounded-2xl shadow-md border-b-4 border-teal-500 hover:shadow-xl transition-all">
+            <span class="text-4xl">💊</span>
+            <h3 class="text-xl font-bold mt-4 text-slate-700">Ibuprofen</h3>
+            <div class="mt-2">
+                <input type="number" id="qty-ibuprofen" class="qty-input" value="1" min="1">
+                <button onclick="sendOrder('ibuprofen')" class="bg-teal-600 text-white px-3 py-1 rounded ml-2">Send</button>
+            </div>
+        </div>
+
+        <div class="med-card bg-white p-6 rounded-2xl shadow-md border-b-4 border-green-500 hover:shadow-xl transition-all">
+            <span class="text-4xl">💊</span>
+            <h3 class="text-xl font-bold mt-4 text-slate-700">Dolo</h3>
+            <div class="mt-2">
+                <input type="number" id="qty-dolo" class="qty-input" value="1" min="1">
+                <button onclick="sendOrder('dolo')" class="bg-teal-600 text-white px-3 py-1 rounded ml-2">Send</button>
+            </div>
+        </div>
+
+        <div class="med-card bg-white p-6 rounded-2xl shadow-md border-b-4 border-green-500 hover:shadow-xl transition-all">
+            <span class="text-4xl">💊</span>
+            <h3 class="text-xl font-bold mt-4 text-slate-700">Azithromycin</h3>
+            <div class="mt-2">
+                <input type="number" id="qty-azithromycin" class="qty-input" value="1" min="1">
+                <button onclick="sendOrder('azithromycin')" class="bg-teal-600 text-white px-3 py-1 rounded ml-2">Send</button>
+            </div>
+        </div>
+
+        <div class="med-card bg-white p-6 rounded-2xl shadow-md border-b-4 border-green-500 hover:shadow-xl transition-all">
+            <span class="text-4xl">💉</span>
+            <h3 class="text-xl font-bold mt-4 text-slate-700">Insulin</h3>
+            <div class="mt-2">
+                <input type="number" id="qty-insulin" class="qty-input" value="1" min="1">
+                <button onclick="sendOrder('insulin')" class="bg-teal-600 text-white px-3 py-1 rounded ml-2">Send</button>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<script>
+    const espIP = "10.67.41.200";
+    const statusText = document.getElementById("conn-status");
+
+    async function checkStatus() {
+        try {
+            // Using a timeout so the UI doesn't hang if the ESP is totally gone
+            const controller = new AbortController();
+            const id = setTimeout(() => controller.abort(), 3000);
+
+            const response = await fetch(`http://${espIP}/status`, { signal: controller.signal });
+            clearTimeout(id);
+
+            if (response.ok) {
+                const text = await response.text();
+                if (text.trim() === "ONLINE") {
+                    statusText.innerText = "Online ✅";
+                    statusText.classList.replace("text-red-400", "text-green-400");
+                    return;
+                }
+            }
+            throw new Error();
+        } catch (error) {
+            statusText.innerText = "Offline ❌";
+            statusText.classList.replace("text-green-400", "text-red-400");
+        }
+    }
+
+    async function sendOrder(name) {
+        // Find input by ID (e.g., qty-vitamin-d3)
+        const inputId = "qty-" + name.toLowerCase();
+        const inputElement = document.getElementById(inputId);
+        const qtyValue = inputElement ? inputElement.value : 1;
+
+        try {
+            const response = await fetch(`http://${espIP}/order?item=${name}&qty=${qtyValue}`);
+            if (response.ok) {
+                alert(`Success: Dispensing ${qtyValue} unit(s) of ${name}`);
+            } else {
+                alert("ESP32 Error: Server returned a problem.");
+            }
+        } catch (error) {
+            alert("Connection Error: Could not reach the ESP32. Check the IP and your WiFi connection.");
+        }
+    }
+
+    // Initial check and set interval
+    checkStatus();
+    setInterval(checkStatus, 5000);
+</script>
+
+</body>
+</html>

@@ -41,9 +41,10 @@ An IoT-powered smart inventory and retrieval shelf system built with the **ESP32
 ### Prerequisites
 1. [Arduino IDE](https://www.arduino.cc/en/software) with the ESP32 board package installed.
 2. Required Libraries:
-   - `ESPAsyncWebServer`
-   - `AsyncTCP`
-   - `LittleFS` / `SPIFFS` (if hosting static assets)
+   - `WiFi.h`
+   - `WebServer.h`
+   - `LiquidCrystal_I2C.H`
+   - `Wire.h`
 
 ### Installation & Flashing
 1. **Clone the repository:**
